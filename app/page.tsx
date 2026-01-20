@@ -341,24 +341,62 @@ export default function ScarletPage() {
 
       {/* Audio Player Section */}
       <div className="py-20 px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto relative">
+           {/* Particles Effect (Only visible when ANA10G H3LL is selected) */}
+           {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
+               <div className="absolute inset-0 pointer-events-none z-0">
+                  {Array.from({ length: 60 }).map((_, i) => {
+                    const side = i % 4; // Distribute along sides
+                    let animationClass = "";
+                    const style: any = {
+                      position: 'absolute',
+                      backgroundColor: '#ef4444', 
+                      borderRadius: '50%',
+                      opacity: 0,
+                      animationDelay: `${Math.random() * 2}s`,
+                      animationDuration: `${1 + Math.random()}s`, // Faster
+                      width: Math.random() > 0.5 ? '2px' : '3px',
+                      height: Math.random() > 0.5 ? '2px' : '3px',
+                    };
+                    
+                    // Position along edges
+                    if (side === 0) { // Top -> Float Up
+                      style.top = '-1px'; 
+                      style.left = `${Math.random() * 100}%`;
+                      animationClass = "animate-float-up";
+                    } else if (side === 1) { // Right -> Float Right
+                      style.right = '-1px';
+                      style.top = `${Math.random() * 100}%`;
+                      animationClass = "animate-float-right";
+                    } else if (side === 2) { // Bottom -> Float Down
+                      style.bottom = '-1px';
+                      style.left = `${Math.random() * 100}%`;
+                      animationClass = "animate-float-down";
+                    } else { // Left -> Float Left
+                      style.left = '-1px';
+                      style.top = `${Math.random() * 100}%`;
+                       animationClass = "animate-float-left";
+                    }
+
+                    return (
+                      <div 
+                        key={i} 
+                        className={animationClass}
+                        style={style}
+                      />
+                    );
+                  })}
+               </div>
+            )}
+
           {/* Main Container - Conditional Styling for ANA10G H3LL */}
           <div 
-            className={`relative backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-500
+            className={`relative z-10 backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-500
               ${currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" 
-                ? "bg-black/80 border-red-500/50 shadow-[0_0_50px_rgba(220,38,38,0.3)] animate-pulse" 
+                ? "bg-black/90 animate-glow-pulse-red" 
                 : "bg-black/40 border-white/10"
               }`}
           >
-            {/* Particles Effect (Only visible when ANA10G H3LL is selected) */}
-            {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
-               <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-                  <div className="absolute top-0 left-1/4 w-2 h-2 bg-red-500 rounded-full animate-ping opacity-75 duration-1000" />
-                  <div className="absolute bottom-0 right-1/4 w-3 h-3 bg-red-600 rounded-full animate-ping opacity-50 duration-1500 delay-300" />
-                  <div className="absolute top-1/2 left-10 w-1 h-1 bg-red-400 rounded-full animate-ping opacity-80 duration-700 delay-100" />
-                  <div className="absolute bottom-10 right-10 w-2 h-2 bg-red-500 rounded-full animate-ping opacity-60 duration-1200 delay-500" />
-               </div>
-            )}
 
             <Equalizer analyser={analyserRef.current} isPlaying={isPlaying} />
             <div className="relative z-10 grid lg:grid-cols-[280px_1fr] gap-0">
