@@ -239,13 +239,17 @@ html {
 .glitch-text::before {
   left: 2px;
   text-shadow: -1px 0 #ef4444;
-  clip: rect(24px, 550px, 90px, 0  clip: rect(24px, 550px, 90px,.5s infinite linear alternate-reverse;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
 }
 
 .glitch-text::after {
-  lef  lef  lef  lef  lef  le-1px 0 #00ffff;
-  clip: rect(85px, 550px  clip: rect(85px, 550px  clip: renim-2 2s infinite linear alternate-reverse;
+  left: -2px;
+  text-shadow: -1px 0 #00ffff;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
 }
 
-.animate.animate.animate.animate.animate.animate.ancubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+.animate-glitch-in {
+  animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
