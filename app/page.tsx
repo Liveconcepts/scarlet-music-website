@@ -24,17 +24,9 @@ export default function ScarletPage() {
 
   const tracks = [
     {
-      title: "ANA10G H3LL",
-      note: "(Unreleased Preview)",
-      artist: "Scarlet",
-      album: "decadance.",
-      duration: "3:42",
-      file: "/media/ana10g-h311.mp3",
-    },
-    {
       title: "Say My Name",
       artist: "Scarlet",
-      album: "decadance.",
+      album: "Say My Name - Single",
       duration: "3:28",
       file: "/media/say-my-name.mp3",
       albumArt: "/images/say-my-name-album-art.png",
@@ -42,7 +34,7 @@ export default function ScarletPage() {
     {
       title: "Phantom",
       artist: "Scarlet",
-      album: "Single",
+      album: "Phantom - Single",
       duration: "3:00",
       file: "/media/Phantom-Singe.wav",
       albumArt: "/images/Phantom Album Cover.png",
@@ -50,7 +42,7 @@ export default function ScarletPage() {
     {
       title: "Bring It Back",
       artist: "Scarlet",
-      album: "Single",
+      album: "Bring It Back - Single",
       duration: "3:00",
       file: "/media/Bring It Back-Single.wav",
       albumArt: "/images/Scarlet Bring It Back Album Cover.png",
@@ -58,10 +50,18 @@ export default function ScarletPage() {
     {
       title: "Pitfire (Feat. Zanaii)",
       artist: "Scarlet",
-      album: "Single",
+      album: "Pitfire (Feat. Zanaii) - Single",
       duration: "3:00",
       file: "/media/pitfire. (Feat. Zanaii).wav",
       albumArt: "/images/Pitfire Album Art.png",
+    },
+    {
+      title: "ANA10G H3LL",
+      note: "(Unreleased Preview)",
+      artist: "Scarlet",
+      album: "decadance.",
+      duration: "3:42",
+      file: "/media/ana10g-h311.mp3",
     },
   ]
 
@@ -342,11 +342,34 @@ export default function ScarletPage() {
       {/* Audio Player Section */}
       <div className="py-20 px-6">
         <div className="max-w-5xl mx-auto">
-          <div className="relative bg-black/40 backdrop-blur-sm border border-white/10 rounded-lg overflow-hidden">
+          {/* Main Container - Conditional Styling for ANA10G H3LL */}
+          <div 
+            className={`relative backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-500
+              ${currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" 
+                ? "bg-black/80 border-red-500/50 shadow-[0_0_50px_rgba(220,38,38,0.3)] animate-pulse" 
+                : "bg-black/40 border-white/10"
+              }`}
+          >
+            {/* Particles Effect (Only visible when ANA10G H3LL is selected) */}
+            {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
+               <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+                  <div className="absolute top-0 left-1/4 w-2 h-2 bg-red-500 rounded-full animate-ping opacity-75 duration-1000" />
+                  <div className="absolute bottom-0 right-1/4 w-3 h-3 bg-red-600 rounded-full animate-ping opacity-50 duration-1500 delay-300" />
+                  <div className="absolute top-1/2 left-10 w-1 h-1 bg-red-400 rounded-full animate-ping opacity-80 duration-700 delay-100" />
+                  <div className="absolute bottom-10 right-10 w-2 h-2 bg-red-500 rounded-full animate-ping opacity-60 duration-1200 delay-500" />
+               </div>
+            )}
+
             <Equalizer analyser={analyserRef.current} isPlaying={isPlaying} />
             <div className="relative z-10 grid lg:grid-cols-[280px_1fr] gap-0">
               {/* Album Art - Compact */}
-              <div className="relative bg-black p-6 border-r border-white/10">
+              <div 
+                className={`relative p-6 border-r transition-colors duration-500
+                  ${currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL"
+                    ? "bg-red-950/80 border-red-500/30"
+                    : "bg-black border-white/10"
+                  }`}
+              >
                 <div className="aspect-square relative overflow-hidden rounded-lg">
                   {currentTrack !== null && tracks[currentTrack].albumArt ? (
                     <Image
@@ -367,8 +390,17 @@ export default function ScarletPage() {
                   )}
                 </div>
                 <div className="mt-4 text-center">
-                  <h4 className="text-lg font-bold uppercase tracking-wider">decadance.</h4>
+                  <h4 className="text-lg font-bold uppercase tracking-wider">
+                    {currentTrack !== null ? tracks[currentTrack].album : "decadance."}
+                  </h4>
                   <p className="text-xs text-gray-400 uppercase tracking-wide mt-1">Scarlet • 2026</p>
+                  
+                  {/* Exclusive Pre-Release Tag */}
+                  {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
+                    <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 animate-pulse">
+                      Exclusive Pre-Release
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -399,7 +431,7 @@ export default function ScarletPage() {
                           <p className="text-sm font-bold uppercase tracking-wide truncate">
                             {track.title}
                             {(track as any).note && (
-                              <span className="text-[10px] font-normal normal-case text-gray-400 ml-2">
+                              <span className="text-xs font-normal normal-case text-gray-400 ml-2">
                                 {(track as any).note}
                               </span>
                             )}
