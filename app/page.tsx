@@ -24,7 +24,7 @@ export default function ScarletPage() {
 
   const tracks = [
     {
-      title: "ANA10G H311",
+      title: "ANA10G H3LL (Early Release)",
       artist: "Scarlet",
       album: "decadance.",
       duration: "3:42",
