@@ -213,7 +213,7 @@ export default function ScarletPage() {
               setShowHellIntro(true);
               setTimeout(() => {
                 setShowHellIntro(false);
-              }, 2500); // 2.5 seconds (0.3s enter + 2s stay + 0.2s exit)
+              }, 3500); // 3.5 seconds
             } else {
               setShowHellIntro(false);
             }
@@ -245,13 +245,11 @@ export default function ScarletPage() {
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hell Mode Intro Overlay */}
       {showHellIntro && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 animate-glitch-in pointer-events-none">
-          <div className="flex flex-col items-center justify-center space-y-4">
-             <div className="glitch-text text-5xl md:text-8xl font-black uppercase tracking-widest text-red-600" data-text="EXCLUSIVE">
-               EXCLUSIVE
-             </div>
-             <div className="glitch-text text-5xl md:text-8xl font-black uppercase tracking-widest text-red-600" data-text="PRE RELEASE">
-               PRE RELEASE
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+          <div className="animate-box-wipe">
+             <div className="text-4xl md:text-6xl font-normal uppercase tracking-[0.5em] text-red-600 whitespace-nowrap px-4" 
+                  style={{ textShadow: '0 0 10px rgba(220, 38, 38, 0.5)' }}>
+               EXCLUSIVE PRE RELEASE
              </div>
           </div>
         </div>

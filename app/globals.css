@@ -253,3 +253,42 @@ html {
 .animate-glitch-in {
   animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
+
+/* Box Glitch Wipe Animation */
+@keyframes box-wipe-reveal {
+  0% { 
+    clip-path: inset(0 100% 0 0);
+    opacity: 0;
+  }
+  15% {
+    clip-path: inset(0 80% 0 0); /* Fast start */
+    opacity: 1;
+  }
+  30% {
+    clip-path: inset(0 85% 0 0); /* Glitch back */
+  }
+  45% {
+    clip-path: inset(0 45% 0 0); /* Jump forward */
+  }
+  60% {
+    clip-path: inset(0 50% 0 0); /* Glitch back */
+  }
+  75% {
+    clip-path: inset(0 10% 0 0); /* Almost there */
+  }
+  100% { 
+    clip-path: inset(0 0 0 0); /* Fully revealed */
+    opacity: 1;
+  }
+}
+
+.animate-box-wipe {
+  /* Slower, smooth-ish duration with steps for glitch feel */
+  animation: box-wipe-reveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+/* Ensure the text is visible for the animation to work on clip-path */
+.box-glitch-container {
+  position: relative;
+  display: inline-block;
+}
