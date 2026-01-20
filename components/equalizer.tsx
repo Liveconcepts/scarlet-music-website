@@ -5,9 +5,11 @@ import { useEffect, useRef } from "react"
 interface EqualizerProps {
   analyser: AnalyserNode | null
   isPlaying: boolean
+  color?: string
+  strokeWidthMultiplier?: number
 }
 
-export default function Equalizer({ analyser, isPlaying }: EqualizerProps) {
+export default function Equalizer({ analyser, isPlaying, color = "255, 255, 255", strokeWidthMultiplier = 1 }: EqualizerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const requestRef = useRef<number>(0)
 
@@ -35,9 +37,9 @@ export default function Equalizer({ analyser, isPlaying }: EqualizerProps) {
 
     // Configuration for the visual style
     const SMOOTHING = 0.8
-    const LINE_WIDTH = 3
+    const LINE_WIDTH = 3 * strokeWidthMultiplier
     const GLOW_BLUR = 10
-    const BASE_COLOR = "255, 255, 255"
+    const BASE_COLOR = color
 
     if (!analyser) {
       return

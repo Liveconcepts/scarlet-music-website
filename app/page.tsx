@@ -65,6 +65,8 @@ export default function ScarletPage() {
     },
   ]
 
+  const isHellMode = currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL";
+
   useEffect(() => {
     setIsVisible(true)
     const handleScroll = () => setScrollY(window.scrollY)
@@ -304,15 +306,28 @@ export default function ScarletPage() {
           className="fixed inset-0 top-0 transition-transform duration-1000 ease-out z-0 pointer-events-none"
           style={{ transform: `translateY(0)` }}
         >
+          {/* Default Background */}
           <video
             autoPlay
             loop
             muted
             playsInline
-            className="absolute inset-0 w-full h-full object-cover opacity-90 scale-110"
+            className={`absolute inset-0 w-full h-full object-cover scale-110 transition-opacity duration-1000 ease-in-out ${isHellMode ? 'opacity-0' : 'opacity-90'}`}
           >
             <source src="/media/hero-loop.mp4" type="video/mp4" />
           </video>
+
+          {/* Hell Mode Background */}
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className={`absolute inset-0 w-full h-full object-cover scale-110 transition-opacity duration-1000 ease-in-out ${isHellMode ? 'opacity-100' : 'opacity-0'}`}
+          >
+            <source src="/media/hell-mode-bg.webm" type="video/webm" />
+          </video>
+
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
         </div>
 
@@ -343,9 +358,10 @@ export default function ScarletPage() {
       <div className="py-20 px-6">
         <div className="max-w-5xl mx-auto relative">
            {/* Particles Effect (Only visible when ANA10G H3LL is selected) */}
-           {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
-               <div className="absolute inset-0 pointer-events-none z-0">
-                  {Array.from({ length: 60 }).map((_, i) => {
+           {/* Increased particle count to 200, smaller size (1-2px), smoother animation */}
+           {isHellMode && (
+               <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden rounded-lg">
+                  {Array.from({ length: 200 }).map((_, i) => {
                     const side = i % 4; // Distribute along sides
                     let animationClass = "";
                     const style: any = {
@@ -353,10 +369,11 @@ export default function ScarletPage() {
                       backgroundColor: '#ef4444', 
                       borderRadius: '50%',
                       opacity: 0,
-                      animationDelay: `${Math.random() * 2}s`,
-                      animationDuration: `${1 + Math.random()}s`, // Faster
-                      width: Math.random() > 0.5 ? '2px' : '3px',
-                      height: Math.random() > 0.5 ? '2px' : '3px',
+                      animationDelay: `${Math.random() * 5}s`,
+                      animationDuration: `${2 + Math.random() * 4}s`, // Smoother duration
+                      width: Math.random() > 0.7 ? '2px' : '1px', // 1px dominant, some 2px
+                      height: Math.random() > 0.7 ? '2px' : '1px',
+                      boxShadow: '0 0 2px rgba(239, 68, 68, 0.5)' // Subtle glow
                     };
                     
                     // Position along edges
@@ -391,21 +408,26 @@ export default function ScarletPage() {
 
           {/* Main Container - Conditional Styling for ANA10G H3LL */}
           <div 
-            className={`relative z-10 backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-500
-              ${currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" 
-                ? "bg-black/90 animate-glow-pulse-red" 
+            className={`relative z-10 backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-1000 ease-in-out
+              ${isHellMode
+                ? "bg-black/90 border-red-900/50 shadow-[0_0_50px_-12px_rgba(220,38,38,0.3)]" 
                 : "bg-black/40 border-white/10"
               }`}
           >
 
-            <Equalizer analyser={analyserRef.current} isPlaying={isPlaying} />
+            <Equalizer 
+              analyser={analyserRef.current} 
+              isPlaying={isPlaying} 
+              color={isHellMode ? "220, 38, 38" : "255, 255, 255"} // Red-600 vs White
+              strokeWidthMultiplier={isHellMode ? 1.5 : 1}
+            />
             <div className="relative z-10 grid lg:grid-cols-[280px_1fr] gap-0">
               {/* Album Art - Compact */}
               <div 
-                className={`relative p-6 border-r transition-colors duration-500
-                  ${currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL"
-                    ? "bg-red-950/80 border-red-500/30"
-                    : "bg-black border-white/10"
+                className={`relative p-6 border-r transition-colors duration-1000
+                  ${isHellMode
+                    ? "bg-red-950/20 border-red-900/30"
+                    : "bg-black/20 border-white/10"
                   }`}
               >
                 <div className="aspect-square relative overflow-hidden rounded-lg">
@@ -434,10 +456,15 @@ export default function ScarletPage() {
                   <p className="text-xs text-gray-400 uppercase tracking-wide mt-1">Scarlet • 2026</p>
                   
                   {/* Exclusive Pre-Release Tag */}
-                  {currentTrack !== null && tracks[currentTrack].title === "ANA10G H3LL" && (
-                    <p className="text-[10px] text-red-500 font-bold uppercase tracking-widest mt-2 animate-pulse">
-                      Exclusive Pre-Release
-                    </p>
+                  {isHellMode && (
+                    <div className="flex flex-col items-center justify-center mt-4 animate-pulse">
+                      <span className="text-[10px] text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
+                        Exclusive
+                      </span>
+                      <span className="text-[10px] text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
+                        Pre Release
+                      </span>
+                    </div>
                   )}
                 </div>
               </div>
@@ -466,7 +493,7 @@ export default function ScarletPage() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold uppercase tracking-wide truncate">
+                          <p className={`text-sm font-bold uppercase tracking-wide truncate ${track.title === "ANA10G H3LL" ? "italic font-extrabold" : ""}`}>
                             {track.title}
                             {(track as any).note && (
                               <span className="text-xs font-normal normal-case text-gray-400 ml-2">
