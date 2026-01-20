@@ -254,37 +254,54 @@ html {
   animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
-/* Box Glitch Wipe Animation */
+/* Box Glitch Wipe Animation - Faster & Glitchier */
 @keyframes box-wipe-reveal {
   0% { 
     clip-path: inset(0 100% 0 0);
     opacity: 0;
+    transform: translateX(-5px);
   }
-  15% {
-    clip-path: inset(0 80% 0 0); /* Fast start */
+  10% {
+    clip-path: inset(0 80% 0 0);
     opacity: 1;
+    transform: translateX(5px);
+  }
+  20% {
+    clip-path: inset(0 90% 0 0); /* Hard glitch back */
+    transform: translateX(-5px);
   }
   30% {
-    clip-path: inset(0 85% 0 0); /* Glitch back */
+    clip-path: inset(0 40% 0 0); /* Big jump */
+    transform: translateX(5px);
   }
-  45% {
-    clip-path: inset(0 45% 0 0); /* Jump forward */
+  40% {
+    clip-path: inset(0 45% 0 0); /* Micro stutter */
+    transform: translateX(0);
+  }
+  50% {
+    clip-path: inset(0 20% 0 0); 
   }
   60% {
-    clip-path: inset(0 50% 0 0); /* Glitch back */
+    clip-path: inset(0 25% 0 0); /* Backwards */
+    transform: translateX(-2px);
   }
-  75% {
-    clip-path: inset(0 10% 0 0); /* Almost there */
+  70% {
+    clip-path: inset(0 5% 0 0);
+  }
+  80% {
+     clip-path: inset(0 10% 0 0);
+     transform: translateX(2px);
   }
   100% { 
-    clip-path: inset(0 0 0 0); /* Fully revealed */
+    clip-path: inset(0 0 0 0); 
     opacity: 1;
+    transform: translateX(0);
   }
 }
 
 .animate-box-wipe {
-  /* Slower, smooth-ish duration with steps for glitch feel */
-  animation: box-wipe-reveal 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  /* Faster duration (0.8s), stepped easing for digital feel */
+  animation: box-wipe-reveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 /* Ensure the text is visible for the animation to work on clip-path */
