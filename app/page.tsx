@@ -24,7 +24,8 @@ export default function ScarletPage() {
 
   const tracks = [
     {
-      title: "ANA10G H3LL (Early Release)",
+      title: "ANA10G H3LL",
+      note: "(Unreleased Preview)",
       artist: "Scarlet",
       album: "decadance.",
       duration: "3:42",
@@ -395,7 +396,14 @@ export default function ScarletPage() {
                           )}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold uppercase tracking-wide truncate">{track.title}</p>
+                          <p className="text-sm font-bold uppercase tracking-wide truncate">
+                            {track.title}
+                            {(track as any).note && (
+                              <span className="text-[10px] font-normal normal-case text-gray-400 ml-2">
+                                {(track as any).note}
+                              </span>
+                            )}
+                          </p>
                           <p className="text-xs text-gray-500 uppercase tracking-wide truncate">{track.artist}</p>
                         </div>
                         <span className="text-xs text-gray-500 font-mono">{track.duration}</span>
