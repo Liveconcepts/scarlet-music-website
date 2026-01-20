@@ -16,6 +16,7 @@ export default function ScarletPage() {
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [currentTrack, setCurrentTrack] = useState<number | null>(null)
+  const [showHellIntro, setShowHellIntro] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
   const audioContextRef = useRef<AudioContext | null>(null)
   const analyserRef = useRef<AnalyserNode | null>(null)
@@ -206,6 +207,16 @@ export default function ScarletPage() {
           .play()
           .then(() => {
             setIsPlaying(true)
+
+             // Handle Hell Mode Intro
+             if (tracks[index].title === "ANA10G H3LL") {
+              setShowHellIntro(true);
+              setTimeout(() => {
+                setShowHellIntro(false);
+              }, 2500); // 2.5 seconds (0.3s enter + 2s stay + 0.2s exit)
+            } else {
+              setShowHellIntro(false);
+            }
           })
           .catch((error) => {
             console.error("[v0] Error playing audio:", error)
@@ -232,6 +243,20 @@ export default function ScarletPage() {
 
   return (
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
+      {/* Hell Mode Intro Overlay */}
+      {showHellIntro && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 animate-glitch-in pointer-events-none">
+          <div className="flex flex-col items-center justify-center space-y-4">
+             <div className="glitch-text text-5xl md:text-8xl font-black uppercase tracking-widest text-red-600" data-text="EXCLUSIVE">
+               EXCLUSIVE
+             </div>
+             <div className="glitch-text text-5xl md:text-8xl font-black uppercase tracking-widest text-red-600" data-text="PRE RELEASE">
+               PRE RELEASE
+             </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-6 lg:px-12">
         <div className="flex items-center justify-between">
@@ -458,10 +483,10 @@ export default function ScarletPage() {
                   {/* Exclusive Pre-Release Tag */}
                   {isHellMode && (
                     <div className="flex flex-col items-center justify-center mt-4 animate-pulse">
-                      <span className="text-[10px] text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
+                      <span className="text-sm md:text-base text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
                         Exclusive
                       </span>
-                      <span className="text-[10px] text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
+                      <span className="text-sm md:text-base text-red-500 font-extrabold uppercase tracking-[0.2em] leading-tight">
                         Pre Release
                       </span>
                     </div>

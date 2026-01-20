@@ -193,3 +193,59 @@ html {
 .animate-float-down { animation: float-down 2s linear infinite; }
 .animate-float-left { animation: float-left 2s linear infinite; }
 .animate-float-right { animation: float-right 2s linear infinite; }
+
+/* Glitch Effect */
+@keyframes glitch-skew {
+  0% { transform: skew(0deg); }
+  20% { transform: skew(-2deg); }
+  40% { transform: skew(2deg); }
+  60% { transform: skew(-1deg); }
+  80% { transform: skew(1deg); }
+  100% { transform: skew(0deg); }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(20px, 9999px, 10px, 0); }
+  20% { clip: rect(65px, 9999px, 80px, 0); }
+  40% { clip: rect(10px, 9999px, 95px, 0); }
+  60% { clip: rect(85px, 9999px, 35px, 0); }
+  80% { clip: rect(45px, 9999px, 5px, 0); }
+  100% { clip: rect(90px, 9999px, 60px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(90px, 9999px, 20px, 0); }
+  20% { clip: rect(5px, 9999px, 50px, 0); }
+  40% { clip: rect(70px, 9999px, 15px, 0); }
+  60% { clip: rect(30px, 9999px, 90px, 0); }
+  80% { clip: rect(15px, 9999px, 65px, 0); }
+  100% { clip: rect(60px, 9999px, 40px, 0); }
+}
+
+.glitch-text {
+  position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -1px 0 #ef4444;
+  clip: rect(24px, 550px, 90px, 0  clip: rect(24px, 550px, 90px,.5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  lef  lef  lef  lef  lef  le-1px 0 #00ffff;
+  clip: rect(85px, 550px  clip: rect(85px, 550px  clip: renim-2 2s infinite linear alternate-reverse;
+}
+
+.animate.animate.animate.animate.animate.animate.ancubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
