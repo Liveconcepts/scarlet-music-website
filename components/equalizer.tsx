@@ -188,7 +188,7 @@ export default function Equalizer({ analyser, isPlaying, color = "255, 255, 255"
       window.removeEventListener('resize', updateSize)
       if (requestRef.current) cancelAnimationFrame(requestRef.current)
     }
-  }, [analyser])
+  }, [analyser, isPlaying, color, strokeWidthMultiplier])
 
   return (
     <div 

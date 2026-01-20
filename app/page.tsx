@@ -435,7 +435,7 @@ export default function ScarletPage() {
           <div 
             className={`relative z-10 backdrop-blur-sm border rounded-lg overflow-hidden transition-all duration-1000 ease-in-out
               ${isHellMode
-                ? "bg-black/90 border-red-900/50 shadow-[0_0_50px_-12px_rgba(220,38,38,0.3)]" 
+                ? "bg-black/40 border-red-900/50 shadow-[0_0_50px_-12px_rgba(220,38,38,0.3)]" 
                 : "bg-black/40 border-white/10"
               }`}
           >
