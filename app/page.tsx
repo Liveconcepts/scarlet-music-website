@@ -213,7 +213,7 @@ export default function ScarletPage() {
               setShowHellIntro(true);
               setTimeout(() => {
                 setShowHellIntro(false);
-              }, 3500); // 3.5 seconds
+              }, 4000); // 4.0 seconds
             } else {
               setShowHellIntro(false);
             }
@@ -245,7 +245,7 @@ export default function ScarletPage() {
     <main className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Hell Mode Intro Overlay */}
       {showHellIntro && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none backdrop-blur-[2px] bg-black/40 animate-overlay-lifecycle">
           <div className="animate-box-wipe">
              <div className="text-4xl md:text-6xl font-normal uppercase tracking-[0.5em] text-red-600 whitespace-nowrap px-4" 
                   style={{ textShadow: '0 0 10px rgba(220, 38, 38, 0.5)' }}>

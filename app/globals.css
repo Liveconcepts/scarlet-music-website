@@ -292,3 +292,15 @@ html {
   position: relative;
   display: inline-block;
 }
+
+/* Overlay Lifecycle Animation */
+@keyframes overlay-lifecycle {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-overlay-lifecycle {
+  animation: overlay-lifecycle 4s ease-in-out forwards;
+}
