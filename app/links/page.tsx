@@ -36,6 +36,13 @@ export default function LinksPage() {
       icon: "/images/pandora-20icon.png",
       color: "hover:shadow-[0_0_20px_rgba(50,85,190,0.3)]",
     },
+    {
+      name: "Official Website",
+      url: "https://scarletsyndicate.com",
+      icon: "/icon.png", // Using the Syndicate Icon favicon
+      color: "hover:shadow-[0_0_25px_rgba(220,38,38,0.5)] border-red-600/50 hover:border-red-600",
+      customClass: "border border-red-500/30",
+    },
   ]
 
   const socials = [
@@ -107,6 +114,7 @@ export default function LinksPage() {
                 backdrop-blur-md rounded-r-xl
                 transition-all duration-300
                 ${link.color}
+                ${(link as any).customClass || ""}
               `}
             >
               <div className="flex items-center gap-4">
@@ -143,26 +151,6 @@ export default function LinksPage() {
 
         {/* Divider */}
         <div className="w-24 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-
-        {/* Website Button */}
-        <div className="animate-in slide-in-from-bottom-4 duration-700 delay-400">
-           <Link 
-             href="https://scarletsyndicate.com"
-             className="
-               relative px-8 py-4 
-               bg-white text-black 
-               font-bold uppercase tracking-[0.2em] text-sm
-               hover:bg-gray-200 hover:tracking-[0.25em]
-               transition-all duration-300
-               clip-path-slant
-             "
-             style={{
-               clipPath: "polygon(10% 0, 100% 0, 90% 100%, 0% 100%)"
-             }}
-           >
-             Official Website
-           </Link>
-        </div>
 
         {/* Footer */}
         <div className="mt-8 opacity-40">
