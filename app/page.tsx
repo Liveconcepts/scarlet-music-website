@@ -246,8 +246,8 @@ export default function ScarletPage() {
       {/* Hell Mode Intro Overlay */}
       {showHellIntro && (
         <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none backdrop-blur-[2px] bg-black/40 animate-overlay-lifecycle">
-          <div className="animate-box-wipe">
-             <div className="text-4xl md:text-6xl font-normal uppercase tracking-[0.5em] text-red-600 whitespace-nowrap px-4" 
+          <div className="animate-box-wipe w-full flex justify-center">
+             <div className="text-xl sm:text-3xl md:text-6xl font-normal uppercase tracking-[0.2em] md:tracking-[0.5em] text-red-600 whitespace-nowrap px-4 text-center" 
                   style={{ textShadow: '0 0 10px rgba(220, 38, 38, 0.5)' }}>
                EXCLUSIVE PRE RELEASE
              </div>
